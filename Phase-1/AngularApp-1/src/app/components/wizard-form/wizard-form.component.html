@@ -1,0 +1,36 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- Step 1 -->
+  <div *ngIf="step === 0" [formGroup]="personalGroup">
+    <h3>Step 1: Personal Info</h3>
+    <input formControlName="name" placeholder="Name" />
+    <div *ngIf="form.get('personal.name')?.invalid && form.get('personal.name')?.touched">
+      ❌ Name is required
+    </div>
+
+    <input formControlName="email" placeholder="Email" />
+    <div *ngIf="form.get('personal.email')?.invalid && form.get('personal.email')?.touched">
+      ❌ Valid email required
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div *ngIf="step === 1" [formGroup]="addressGroup">
+    <h3>Step 2: Address Info</h3>
+    <input formControlName="city" placeholder="City" />
+    <input formControlName="postalCode" placeholder="Postal Code" />
+  </div>
+
+  <!-- Step 3 -->
+  <div *ngIf="step === 2" [formGroup]="accountGroup">
+    <h3>Step 3: Account Info</h3>
+    <input formControlName="password" type="password" placeholder="Password" />
+    <input formControlName="confirmPassword" type="password" placeholder="Confirm Password" />
+  </div>
+
+  <!-- Buttons -->
+  <div style="margin-top: 20px">
+    <button type="button" (click)="prevStep()" [disabled]="step === 0">⬅️ Back</button>
+    <button type="button" (click)="nextStep()" *ngIf="step < 2">Next ➡️</button>
+    <button type="submit" *ngIf="step === 2" [disabled]="form.invalid">Submit ✅</button>
+  </div>
+</form>

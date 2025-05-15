@@ -1,0 +1,17 @@
+<h2>📝 User Registration</h2>
+
+<form (ngSubmit)="onSubmit()" #formRef="ngForm">
+  <label>Name:</label>
+  <input name="name" [(ngModel)]="user.name" required minlength="3"/>
+  <br /><br />
+
+  <label>Email:</label>
+  <input name="email" type="email" [(ngModel)]="user.email" required />
+  <br /><br />
+
+  <button type="submit" [disabled]="formRef.invalid">Submit</button>
+</form>
+
+<p><strong>Live Preview:</strong></p>
+<p>Name: {{ user.name }}</p>
+<p>Email: {{ user.email }}</p>
